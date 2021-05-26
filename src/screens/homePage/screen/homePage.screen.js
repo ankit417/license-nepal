@@ -64,6 +64,7 @@ const CONTENTS = [
   },
 ];
 
+//Header
 const Header = ({animation}) => {
   return (
     <View style={styles.headerContainer}>
