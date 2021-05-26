@@ -1,5 +1,6 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
+pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 platform :ios, '10.0'
 
@@ -11,6 +12,7 @@ target 'LicenseNepal' do
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => false
   )
+
 
   target 'LicenseNepalTests' do
     inherit! :complete
