@@ -13,7 +13,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import DRIVER_SVG from './assets/app/driver.svg';
+// import DRIVER_SVG from './assets/app/driver.svg';
+import DRIVER_SVG from '../../../../assets/app/driver.svg';
 const {height, width} = Dimensions.get('window');
 
 const CONTENTS = [
@@ -100,7 +101,7 @@ const Content = () => {
   );
 };
 
-const App = () => {
+export const HomePage = () => {
   const ScrollSVG = useRef(new Animated.Value(0)).current;
   const SVGIMAGE = ScrollSVG.interpolate({
     inputRange: [0, 45, 200],
@@ -164,5 +165,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default App;
