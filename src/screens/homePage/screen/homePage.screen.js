@@ -10,10 +10,13 @@ import {
   Dimensions,
   FlatList,
   Animated,
+  TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import DRIVER_SVG from './assets/app/driver.svg';
+// import DRIVER_SVG from './assets/app/driver.svg';
+import DRIVER_SVG from '../../../../assets/app/driver.svg';
 const {height, width} = Dimensions.get('window');
 
 const CONTENTS = [
@@ -76,13 +79,15 @@ const Header = ({animation}) => {
   );
 };
 
-const Content = () => {
+const Content = ({navigate}) => {
   return (
     <View style={styles.contentContainer}>
       <FlatList
         data={CONTENTS}
         renderItem={({item}) => (
-          <View style={styles.contentItemWrapper}>
+          <TouchableOpacity
+            onPress={() => navigate('TrafficSign')}
+            style={styles.contentItemWrapper}>
             <View
               style={[
                 styles.contentItem,
@@ -91,7 +96,7 @@ const Content = () => {
               <Icon name="book" size={25} color={item.color} />
             </View>
             <Text style={styles.contentText}>{item.name}</Text>
-          </View>
+          </TouchableOpacity>
         )}
         numColumns={3}
         keyExtractor={(item, index) => index.toString()}
@@ -100,7 +105,8 @@ const Content = () => {
   );
 };
 
-const App = () => {
+export const HomePage = () => {
+  const {navigate} = useNavigation();
   const ScrollSVG = useRef(new Animated.Value(0)).current;
   const SVGIMAGE = ScrollSVG.interpolate({
     inputRange: [0, 45, 200],
@@ -119,7 +125,7 @@ const App = () => {
           ],
           {useNativeDriver: true},
         )}>
-        <Content />
+        <Content navigate={navigate} />
         <View style={{height: 100}} />
       </Animated.ScrollView>
     </SafeAreaView>
@@ -164,5 +170,3 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-
-export default App;

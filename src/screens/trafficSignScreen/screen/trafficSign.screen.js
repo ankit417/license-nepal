@@ -12,6 +12,7 @@ import {
   Animated,
   Image,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import LIMIT from '../../../../assets/app/40.png';
@@ -64,9 +65,15 @@ const CONTENTS = [
 
 //Header
 const Header = () => {
+  const {navigate, goBack} = useNavigation();
   return (
     <View style={styles.headerWrapper}>
-      <Icon name="arrow-back-outline" size={30} color="#FFF" />
+      <Icon
+        onPress={() => goBack()}
+        name="arrow-back-outline"
+        size={30}
+        color="#FFF"
+      />
       <Text style={styles.headerText}>Traffic Signs</Text>
     </View>
   );
