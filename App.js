@@ -14,6 +14,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import DRIVER_SVG from './assets/app/driver.svg';
+import {TrafficSign} from './src/screens/trafficSignScreen/screen/trafficSign.screen';
 const {height, width} = Dimensions.get('window');
 
 const CONTENTS = [
@@ -108,7 +109,7 @@ const App = () => {
   });
   return (
     <SafeAreaView style={styles.container}>
-      <Header animation={SVGIMAGE} />
+      {/* <Header animation={SVGIMAGE} />
       <Animated.ScrollView
         onScroll={Animated.event(
           [
@@ -120,7 +121,9 @@ const App = () => {
         )}>
         <Content />
         <View style={{height: 100}} />
-      </Animated.ScrollView>
+      </Animated.ScrollView> */}
+
+      <TrafficSign />
     </SafeAreaView>
   );
 };
