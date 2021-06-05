@@ -12,6 +12,7 @@ import {
   Animated,
   TouchableOpacity,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Arrow from 'react-native-vector-icons/AntDesign';
 
@@ -38,8 +39,19 @@ const CONTENTS = [
 ];
 
 const Header = () => {
+  const {navigate, goBack} = useNavigation();
+
   return (
     <View style={styles.headerWrapper}>
+      <View style={styles.header}>
+        <Icon
+          onPress={() => goBack()}
+          name="arrow-back-outline"
+          size={30}
+          color="#FFF"
+          style={{zIndex: 100}}
+        />
+      </View>
       <View style={styles.bubble} />
       <View style={styles.bubbleRight} />
     </View>
@@ -87,9 +99,9 @@ const Options = ({
                     {
                       translateX: answerSelected
                         ? revealAnswer && index === answer
-                          ? '0deg'
+                          ? 0
                           : spin
-                        : '0deg',
+                        : 0,
                     },
                   ],
                 },
@@ -217,6 +229,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#2A9D8F',
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
+  },
+  header: {
+    height: 60,
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(42, 157, 143, 0.1)',
+    flexDirection: 'row',
+    alignItems: 'center',
+    zIndex: 100,
   },
   bubble: {
     height: 100,
