@@ -11,6 +11,7 @@ import {
   FlatList,
   Animated,
 } from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const {height, width} = Dimensions.get('window');
@@ -79,10 +80,28 @@ const CONTENTS = [
   },
 ];
 
-const App = () => {
+//Header
+const Header = () => {
+  const {navigate, goBack} = useNavigation();
+  return (
+    <View style={styles.headerWrapper}>
+      <Icon
+        onPress={() => goBack()}
+        name="arrow-back-outline"
+        size={30}
+        color="#FFF"
+      />
+      <Text style={styles.headerText}>Important Lessons</Text>
+    </View>
+  );
+};
+
+export const ImportantLesson = () => {
   const scrollY = useRef(new Animated.Value(0)).current;
   return (
     <SafeAreaView style={styles.container}>
+      <Header />
+
       {/* <View style={styles.contentMainWrapper}> */}
       <Animated.FlatList
         data={CONTENTS}
@@ -123,13 +142,25 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  //   Header
+  headerWrapper: {
+    height: 60,
+    paddingHorizontal: 20,
+    backgroundColor: '#E9C46A',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  headerText: {
+    marginLeft: 20,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFF',
+  },
   container: {
     backgroundColor: '#eeeeee',
     flex: 1,
   },
-  // contentMainWrapper: {
-  //   marginHorizontal: SPACING,
-  // },
   contentWrapper: {
     display: 'flex',
     flexDirection: 'row',
@@ -153,5 +184,3 @@ const styles = StyleSheet.create({
     paddingRight: 10,
   },
 });
-
-export default App;

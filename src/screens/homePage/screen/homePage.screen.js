@@ -24,46 +24,55 @@ const CONTENTS = [
     name: 'Important Lesson',
     color: '#E9C46A',
     backgroundColor: 'rgba(233, 196, 106, 0.2)',
+    navigate: 'ImportantLesson',
   },
   {
     name: 'Quiz',
     color: '#F4A261',
     backgroundColor: 'rgba(244, 162, 97, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Required Documents',
     color: '#E76F51',
     backgroundColor: 'rgba(231, 111, 81, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Vision Test',
     color: '#E97C61',
     backgroundColor: 'rgba(233, 124, 97, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Traffic Sign',
     color: '#EB886F',
     backgroundColor: 'rgba(235, 136, 111, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Date Converter',
     color: '#2A9D8F',
     backgroundColor: 'rgba(42, 157, 143, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Trial',
     color: '#EF9D88',
     backgroundColor: 'rgba(239, 157, 136, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Driving Centers',
     color: '#F0A693',
     backgroundColor: 'rgba(240, 166, 147, 0.2)',
+    navigate: 'TrafficSign',
   },
   {
     name: 'Registration',
     color: '#264653',
     backgroundColor: 'rgba(38, 70, 83, 0.2)',
+    navigate: 'TrafficSign',
   },
 ];
 
@@ -86,7 +95,7 @@ const Content = ({navigate}) => {
         data={CONTENTS}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => navigate('TrafficSign')}
+            onPress={() => navigate(item.navigate)}
             style={styles.contentItemWrapper}>
             <View
               style={[
