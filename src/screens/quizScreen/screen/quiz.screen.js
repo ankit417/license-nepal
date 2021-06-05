@@ -19,9 +19,10 @@ const SPACING = 25;
 
 const CONTENTS = [
   {
-    questions: 'Hey whats your name',
-    options: ['ankit', 'not ankit', 'harke', 'birkhe'],
-    answer: 0,
+    questions:
+      'Eritrea, which became the 182nd member of the UN in 1993, is in the continent of',
+    options: ['Asia', 'Africa', 'Europe', 'Australia'],
+    answer: 1,
   },
 ];
 
@@ -45,11 +46,12 @@ const Question = ({question}) => {
 const Options = ({options, selectedAnswer, answer, userSelect}) => {
   // console.log('options ', options);
   let revealAnswer = selectedAnswer != null ? true : false;
+  //  let revealAnswer = selectedAnswer != null ? true : false;
+
   return (
     <View style={styles.optionWrapper}>
       {options.map((item, index) => {
         let answerSelected = index === selectedAnswer;
-        // let realAnswer = answerSelected && index === answer;
         return (
           <TouchableOpacity
             key={index}
@@ -93,7 +95,7 @@ const Bottom = ({count, totalCount}) => {
   );
 };
 
-const App = () => {
+export const Quiz = () => {
   const [selected, setSelected] = useState(CONTENTS[0]);
   const [selectedIndex, setSelectedIndex] = useState(1);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -188,5 +190,3 @@ const styles = StyleSheet.create({
   quesCount: {},
   next: {},
 });
-
-export default App;

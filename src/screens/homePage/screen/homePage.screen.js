@@ -30,7 +30,7 @@ const CONTENTS = [
     name: 'Quiz',
     color: '#F4A261',
     backgroundColor: 'rgba(244, 162, 97, 0.2)',
-    navigate: 'TrafficSign',
+    navigate: 'Quiz',
   },
   {
     name: 'Required Documents',
