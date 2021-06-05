@@ -11,13 +11,48 @@ import {
   FlatList,
   Animated,
   TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import PushNotification, {Importance} from 'react-native-push-notification';
 
 // import DRIVER_SVG from './assets/app/driver.svg';
 import DRIVER_SVG from '../../../../assets/app/driver.svg';
+import {useEffect} from 'react/cjs/react.development';
 const {height, width} = Dimensions.get('window');
+
+PushNotification.configure({
+  onRegister: function (token) {
+    console.log('TOKEN:', token);
+  },
+  onAction: function (notification) {
+    console.log('ACTION:', notification.action);
+    console.log('NOTIFICATION:', notification);
+
+    // process the action
+  },
+  permissions: {
+    alert: true,
+    badge: true,
+    sound: true,
+  },
+  popInitialNotification: true,
+  requestPermissions: Platform.OS === 'ios',
+});
+
+PushNotification.createChannel(
+  {
+    channelId: 'ankit1', // (required)
+    channelName: 'My fchannel', // (required)
+    channelDescription: 'A channel to categorise your notifications', // (optional) default: undefined.
+    playSound: false, // (optional) default: true
+    soundName: 'default', // (optional) See `soundName` parameter of `localNotification` function
+    importance: Importance.HIGH, // (optional) default: Importance.HIGH. Int value of the Android notification importance
+    vibrate: true, // (optional) default: true. Creates the default vibration patten if true.
+  },
+  created => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+);
 
 const CONTENTS = [
   {
@@ -76,6 +111,19 @@ const CONTENTS = [
   },
 ];
 
+const test = () => {
+  PushNotification.localNotification({
+    channelId: 'ankit1',
+    ongoing: false, // (optional) set whether this is an "ongoing" notification
+    title: 'this is title', // (optional)
+    message: 'this is message', // (required)
+    actions: ['Yes', 'No'],
+    bigPictureUrl:
+      'https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2019/07/Man-Silhouette.jpg',
+    when: Date.now(), // (optional) Add a timestamp (Unix timestamp value in milliseconds) pertaining to the notification (usually the time the event occurred). For apps targeting Build.VERSION_CODES.N and above, this time is not shown anymore by default and must be opted into by using `showWhen`, default: null.
+    usesChronometer: true,
+  });
+};
 //Header
 const Header = ({animation}) => {
   return (
@@ -95,7 +143,7 @@ const Content = ({navigate}) => {
         data={CONTENTS}
         renderItem={({item}) => (
           <TouchableOpacity
-            onPress={() => navigate(item.navigate)}
+            onPress={() => test()}
             style={styles.contentItemWrapper}>
             <View
               style={[
