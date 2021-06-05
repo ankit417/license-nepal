@@ -30,7 +30,7 @@ const CONTENTS = [
     name: 'Quiz',
     color: '#F4A261',
     backgroundColor: 'rgba(244, 162, 97, 0.2)',
-    navigate: 'Quiz',
+    navigate: 'QuizSet',
   },
   {
     name: 'Required Documents',
@@ -124,6 +124,7 @@ export const HomePage = () => {
   });
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#E9C46A" />
       <Header animation={SVGIMAGE} />
       <Animated.ScrollView
         onScroll={Animated.event(

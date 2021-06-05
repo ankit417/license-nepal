@@ -10,6 +10,7 @@ import {
   Dimensions,
   FlatList,
   Animated,
+  TouchableOpacity,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -20,64 +21,43 @@ const SPACING = 25;
 
 const CONTENTS = [
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
   {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
-  },
-  {
-    lesson: 'Lorem ipsum is the dummy text',
+    set: 'Lorem ipsum is the dummy text',
   },
 ];
 
@@ -92,19 +72,20 @@ const Header = () => {
         size={30}
         color="#FFF"
       />
-      <Text style={styles.headerText}>Important Lessons</Text>
+      <Text style={styles.headerText}>Quiz Set</Text>
     </View>
   );
 };
 
-export const ImportantLesson = () => {
+export const QuizSet = () => {
+  const {navigate, goBack} = useNavigation();
+
   const scrollY = useRef(new Animated.Value(0)).current;
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar backgroundColor="#E9C46A" />
       <Header />
 
-      {/* <View style={styles.contentMainWrapper}> */}
       <Animated.FlatList
         data={CONTENTS}
         contentContainerStyle={{
@@ -123,17 +104,22 @@ export const ImportantLesson = () => {
             outputRange: [1, 1, 1, 0],
           });
           return (
-            <Animated.View
-              style={[styles.contentWrapper, {transform: [{scale}]}]}>
-              <View style={styles.contentIcon}>
-                <Icon name="book" size={25} />
-              </View>
-              <View style={styles.lessonTextWrapper}>
-                <Text style={styles.lessonText}>{item.lesson}</Text>
-              </View>
-              <View style={styles.nextArrow}>
-                <Arrow name="arrowright" size={25} />
-              </View>
+            <Animated.View style={[{transform: [{scale}]}]}>
+              <TouchableOpacity
+                onPress={() => {
+                  navigate('Quiz');
+                }}
+                style={styles.contentWrapper}>
+                <View style={styles.contentIcon}>
+                  <Icon name="book" size={25} />
+                </View>
+                <View style={styles.lessonTextWrapper}>
+                  <Text style={styles.lessonText}>{item.set}</Text>
+                </View>
+                <View style={styles.nextArrow}>
+                  <Arrow name="arrowright" size={25} />
+                </View>
+              </TouchableOpacity>
             </Animated.View>
           );
         }}
@@ -143,6 +129,13 @@ export const ImportantLesson = () => {
   );
 };
 
+// export const QuizSet = () => {
+//   return (
+//     <View>
+//       <Text>Hello</Text>
+//     </View>
+//   );
+// };
 const styles = StyleSheet.create({
   //   Header
   headerWrapper: {
