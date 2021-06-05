@@ -6,6 +6,8 @@ import {TrafficSign} from '../screens/trafficSignScreen/screen/trafficSign.scree
 import {ImportantLesson} from '../screens/lessons/screen';
 import {Quiz, QuizSet} from '../screens/quizScreen/screen';
 import {DateConverter} from '../screens/DateConvert/screen';
+import {ColorVision} from '../screens/colorVision/screen';
+
 const MainApp = createStackNavigator();
 
 const MainNavigation = () => {
@@ -18,6 +20,7 @@ const MainNavigation = () => {
         <MainApp.Screen name="Quiz" component={Quiz} />
         <MainApp.Screen name="DateConvert" component={DateConverter} />
         <MainApp.Screen name="TrafficSign" component={TrafficSign} />
+        <MainApp.Screen name="ColorVision" component={ColorVision} />
       </MainApp.Navigator>
     </NavigationContainer>
   );

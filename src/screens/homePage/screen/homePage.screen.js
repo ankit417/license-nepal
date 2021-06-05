@@ -42,7 +42,7 @@ const CONTENTS = [
     name: 'Vision Test',
     color: '#E97C61',
     backgroundColor: 'rgba(233, 124, 97, 0.2)',
-    navigate: 'TrafficSign',
+    navigate: 'ColorVision',
   },
   {
     name: 'Traffic Sign',
