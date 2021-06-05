@@ -54,34 +54,58 @@ const Question = ({question}) => {
   );
 };
 
-const Options = ({options, selectedAnswer, answer, userSelect}) => {
+const Options = ({
+  options,
+  selectedAnswer,
+  answer,
+  userSelect,
+  animateAnswer,
+}) => {
   let revealAnswer = selectedAnswer != null ? true : false;
-
+  console.log('animate answer', animateAnswer);
+  let spin = animateAnswer.interpolate({
+    inputRange: [0, 0.5, 1],
+    outputRange: [-15, 15, 0],
+  });
+  // let wrongAnswerStyle = {transform: [{rotate: spin}]};
   return (
     <View style={styles.optionWrapper}>
       {options.map((item, index) => {
         let answerSelected = index === selectedAnswer;
+
         return (
-          <TouchableOpacity
-            key={index}
-            style={[
-              styles.optionsItem,
-              {
-                backgroundColor:
-                  revealAnswer && index === answer ? '#2A9D8F' : '#fff',
-              },
-            ]}
-            onPress={() => selectedAnswer == null && userSelect(index)}>
-            <Text>{item}</Text>
-            <View
+          <Animated.View key={index}>
+            <TouchableOpacity
               style={[
-                styles.optionsCheck,
+                styles.optionsItem,
                 {
-                  backgroundColor: answerSelected ? '#EB886F' : '#eee',
+                  backgroundColor:
+                    revealAnswer && index === answer ? '#2A9D8F' : '#fff',
+                },
+                {
+                  transform: [
+                    {
+                      translateX: answerSelected
+                        ? revealAnswer && index === answer
+                          ? '0deg'
+                          : spin
+                        : '0deg',
+                    },
+                  ],
                 },
               ]}
-            />
-          </TouchableOpacity>
+              onPress={() => selectedAnswer == null && userSelect(index)}>
+              <Text>{item}</Text>
+              <View
+                style={[
+                  styles.optionsCheck,
+                  {
+                    backgroundColor: answerSelected ? '#EB886F' : '#eee',
+                  },
+                ]}
+              />
+            </TouchableOpacity>
+          </Animated.View>
         );
       })}
     </View>
@@ -123,7 +147,24 @@ export const Quiz = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answer, setAnswer] = useState(CONTENTS[0].answer);
-  console.log('selec', selected);
+
+  const animateAnswer = useRef(new Animated.Value(0.01)).current;
+
+  const shakeAnswer = () => {
+    console.log('shaking answer', animateAnswer);
+    Animated.timing(animateAnswer, {
+      toValue: 1,
+      duration: 200,
+      useNativeDriver: true,
+    }).start();
+
+    console.log('shaked answer', animateAnswer);
+  };
+
+  const userSelectedAnswer = props => {
+    setSelectedAnswer(props);
+    shakeAnswer();
+  };
 
   const nextPressed = () => {
     console.log('============>');
@@ -131,6 +172,7 @@ export const Quiz = () => {
     setAnswer(CONTENTS[selectedIndex + 1].answer);
     setSelectedIndex(prev => prev + 1);
     setSelectedAnswer(null);
+    animateAnswer.setValue(0.01);
   };
 
   const prevPressed = () => {
@@ -138,6 +180,7 @@ export const Quiz = () => {
     setAnswer(CONTENTS[selectedIndex - 1].answer);
     setSelectedIndex(prev => prev - 1);
     setSelectedAnswer(null);
+    animateAnswer.setValue(0.01);
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -150,7 +193,8 @@ export const Quiz = () => {
           options={selected.options}
           selectedAnswer={selectedAnswer}
           answer={answer}
-          userSelect={setSelectedAnswer}
+          userSelect={userSelectedAnswer}
+          animateAnswer={animateAnswer}
         />
       </ScrollView>
       <Bottom
