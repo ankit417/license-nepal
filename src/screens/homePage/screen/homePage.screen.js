@@ -54,7 +54,7 @@ const CONTENTS = [
     name: 'Date Converter',
     color: '#2A9D8F',
     backgroundColor: 'rgba(42, 157, 143, 0.2)',
-    navigate: 'TrafficSign',
+    navigate: 'DateConvert',
   },
   {
     name: 'Trial',

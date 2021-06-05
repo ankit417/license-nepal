@@ -14,6 +14,7 @@
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
     "@types/jest": "^26.0.23",
+    "ad-bs-converter": "^0.5.0",
     "react": "17.0.1",
     "react-native": "0.64.1",
     "react-native-gesture-handler": "^1.10.3",
@@ -39,7 +40,14 @@
     "setupFiles": [
       "<rootDir>/jest/setup.js"
     ],
-    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
     "transformIgnorePatterns": [
       "node_modules",
       "<rootDir>/node_modules/(?!@react-native/.*)",
