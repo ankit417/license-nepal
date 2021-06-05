@@ -25,6 +25,16 @@ const CONTENTS = [
     options: ['Asia', 'Africa', 'Europe', 'Australia'],
     answer: 1,
   },
+  {
+    questions: 'Hey',
+    options: ['Asia', 'Africa', 'Europe', 'Australia'],
+    answer: 1,
+  },
+  {
+    questions: 'Hello',
+    options: ['Asia', 'Africa', 'Europe', 'Australia'],
+    answer: 1,
+  },
 ];
 
 const Header = () => {
@@ -78,30 +88,61 @@ const Options = ({options, selectedAnswer, answer, userSelect}) => {
   );
 };
 
-const Bottom = ({count, totalCount}) => {
+const Bottom = ({count, totalCount, onPrevPressed, onNextPressed}) => {
+  const hidePrev = count == 1;
+  const hideNext = count == totalCount;
   return (
     <View style={styles.bottomWrapper}>
-      <View style={styles.prev}>
-        <Arrow name="arrowleft" size={25} />
-      </View>
+      <TouchableOpacity
+        style={styles.prev}
+        onPress={() => !hidePrev && onPrevPressed()}>
+        <Arrow
+          name="arrowleft"
+          size={25}
+          color={!hidePrev ? '#000000' : '#eeeeee'}
+        />
+      </TouchableOpacity>
       <View style={styles.quesCount}>
-        <Text>{`${count}/${totalCount}`}</Text>
+        <Text>{`${count} / ${totalCount}`}</Text>
       </View>
-      <View style={styles.next}>
-        <Arrow name="arrowright" size={25} />
-      </View>
+      <TouchableOpacity
+        style={styles.next}
+        onPress={() => !hideNext && onNextPressed()}>
+        <Arrow
+          name="arrowright"
+          size={25}
+          color={!hideNext ? '#000000' : '#eeeeee'}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
 
 export const Quiz = () => {
   const [selected, setSelected] = useState(CONTENTS[0]);
-  const [selectedIndex, setSelectedIndex] = useState(1);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [answer, setAnswer] = useState(CONTENTS[0].answer);
   console.log('selec', selected);
+
+  const nextPressed = () => {
+    console.log('============>');
+    setSelected(CONTENTS[selectedIndex + 1]);
+    setAnswer(CONTENTS[selectedIndex + 1].answer);
+    setSelectedIndex(prev => prev + 1);
+    setSelectedAnswer(null);
+  };
+
+  const prevPressed = () => {
+    setSelected(CONTENTS[selectedIndex - 1]);
+    setAnswer(CONTENTS[selectedIndex - 1].answer);
+    setSelectedIndex(prev => prev - 1);
+    setSelectedAnswer(null);
+  };
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar backgroundColor="#2A9D8F" />
+
       <Header />
       <Question question={selected.questions} />
       <ScrollView style={{marginBottom: 70, top: -30}}>
@@ -112,7 +153,12 @@ export const Quiz = () => {
           userSelect={setSelectedAnswer}
         />
       </ScrollView>
-      <Bottom count={selectedIndex} totalCount={CONTENTS.length} />
+      <Bottom
+        count={selectedIndex + 1}
+        totalCount={CONTENTS.length}
+        onPrevPressed={() => prevPressed()}
+        onNextPressed={() => nextPressed()}
+      />
     </SafeAreaView>
   );
 };
