@@ -36,14 +36,24 @@
   },
   "jest": {
     "preset": "react-native",
+    "setupFiles": [
+      "<rootDir>/jest/setup.js"
+    ],
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"],
     "transformIgnorePatterns": [
-      "node_modules/(?!@react-native|react-native)"
+      "node_modules",
+      "<rootDir>/node_modules/(?!@react-native/.*)",
+      "node_modules/(?!(@react-native|react-native|@react-navigation)/)"
     ],
     "coveragePathIgnorePatterns": [
       "node_modules"
     ],
     "modulePathIgnorePatterns": [
       "node_modules"
-    ]
+    ],
+    "globals": {
+      "__DEV__": true
+    },
+    "testEnvironment": "node"
   }
 }
