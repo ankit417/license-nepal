@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Arrow from 'react-native-vector-icons/AntDesign';
 
 const {height, width} = Dimensions.get('window');
 const SPACING = 25;
@@ -83,13 +84,13 @@ const Bottom = ({count, totalCount}) => {
   return (
     <View style={styles.bottomWrapper}>
       <View style={styles.prev}>
-        <Icon name="book" size={25} />
+        <Arrow name="arrowleft" size={25} />
       </View>
       <View style={styles.quesCount}>
         <Text>{`${count}/${totalCount}`}</Text>
       </View>
       <View style={styles.next}>
-        <Icon name="book" size={25} />
+        <Arrow name="arrowright" size={25} />
       </View>
     </View>
   );
