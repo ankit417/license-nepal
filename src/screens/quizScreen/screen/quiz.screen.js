@@ -45,9 +45,7 @@ const Question = ({question}) => {
 };
 
 const Options = ({options, selectedAnswer, answer, userSelect}) => {
-  // console.log('options ', options);
   let revealAnswer = selectedAnswer != null ? true : false;
-  //  let revealAnswer = selectedAnswer != null ? true : false;
 
   return (
     <View style={styles.optionWrapper}>

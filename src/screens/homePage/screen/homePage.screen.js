@@ -56,24 +56,24 @@ const CONTENTS = [
     backgroundColor: 'rgba(42, 157, 143, 0.2)',
     navigate: 'DateConvert',
   },
-  {
-    name: 'Trial',
-    color: '#EF9D88',
-    backgroundColor: 'rgba(239, 157, 136, 0.2)',
-    navigate: 'TrafficSign',
-  },
-  {
-    name: 'Driving Centers',
-    color: '#F0A693',
-    backgroundColor: 'rgba(240, 166, 147, 0.2)',
-    navigate: 'TrafficSign',
-  },
-  {
-    name: 'Registration',
-    color: '#264653',
-    backgroundColor: 'rgba(38, 70, 83, 0.2)',
-    navigate: 'TrafficSign',
-  },
+  // {
+  //   name: 'Trial',
+  //   color: '#EF9D88',
+  //   backgroundColor: 'rgba(239, 157, 136, 0.2)',
+  //   navigate: 'TrafficSign',
+  // },
+  // {
+  //   name: 'Driving Centers',
+  //   color: '#F0A693',
+  //   backgroundColor: 'rgba(240, 166, 147, 0.2)',
+  //   navigate: 'TrafficSign',
+  // },
+  // {
+  //   name: 'Registration',
+  //   color: '#264653',
+  //   backgroundColor: 'rgba(38, 70, 83, 0.2)',
+  //   navigate: 'TrafficSign',
+  // },
 ];
 
 //Header
